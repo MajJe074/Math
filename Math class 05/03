@@ -1,0 +1,24 @@
+
+
+
+
+
+
+def function1(x, xtilda, V):
+    if xtilda =/ speciallist:
+        return -infinity
+    elif xtilda= speciallist:
+        return basefunction(x,xtilda)+ b*V(xtilda)
+
+def function2 (x,V):
+    max function1(x, xtilda, V)
+
+while Dist>= eta
+    for i in N:
+        T(V(i))= function2(x[i], V)
+        break
+        if Dist=norm(T(V)-V):
+            V=copy(T(V))
+            break
+break
+        
