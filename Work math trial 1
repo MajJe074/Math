@@ -1,24 +1,84 @@
-theta=float(input("give us the elsatticity of consumption:"))
-beta=float(input("give us the input for the discount rate:"))
+import numpy as np
+import math
 
+#State Space X
+K= np.linspace(0,5,100)
+VK = list(K)
+#Initial value fct
+V=np.linspace(0,0,100)
+
+#Starting Capital (in K) (Here K1=2.5)
+
+
+#Parameter Values
+theta=1.5
+beta=0.95
+alpha=0.3
+delta=0.1
+#theta=float(input("give us the elsatticity of consumption:"))
+
+#beta=float(input("give us the input for the discount rate:"))
+
+
+#Include non-negativity constraint
 def u(c):
     utility=((c**(1-theta))-1)/(1-theta)
-    return utility
+    if c<0:
+        return -math.exp(200)
+    else:
+        return utility
 
-alpha=float(input("give us the marginal return of capital:"))
-delta= float(input("give us the detrition rate:"))
-
-
-def ct(kt1, kt2):
+#delta= float(input("give us the detrition rate:"))
+#alpha=float(input("give us the marginal return of capital:"))
+        
+    #i is the index for k1 / j for k2--> i tells us what the starting capital is equal to
+def ct(i, j, K):
+    kt1 = K[int(i)]
+    kt2 = K[int(j)]
     thisct=((kt1**alpha)+(1-delta)*kt1-kt2)
     return thisct
 
-def funct1(ct(kt1, kt2), V):
-    if kt2 /= speciallist:
-        #you still need to define specialist term
-        return -10000000000000000000000000000000000000000
-    elif kt2 == speciallist:
-        return u(ct(kt1, kt2))+ beta*V(kt2)
+#Check for k1=0.005 and k2=0.03
+print(ct(1,6,K))
+#Check for k1=2.5 and k2=5
+#print(ct(500,999,K))
+#print(ct(100,105,K))
 
-def funct2 (kt1, kt2, V):
-    max function1(kt1, kt2, V)
+
+cstr="Violation of Non-negativity Constraint"
+#Objective Function - FCT1
+
+def obj(i, j, K):
+    cons = ct(i,j,K)
+    if cons >=0:
+        return u(cons)+ beta*V[j]
+    else: 
+        return -math.exp(200)
+    
+#For k1_2 and k2_11 we find a negative Utility --> Still ok?:
+print(obj(2,11,K))
+#print(obj(500,999,K))
+
+
+#Maximizing the Objective function
+
+length=range(len(K))
+
+ 
+def fct2(i,K):
+    values_i=[]
+    for j in length:
+            values_i.append(float(obj(i,j,K)))
+    return values_i
+
+#print(fct2(i,K))
+#print(max(fct2(i,K)))
+def g(i):
+    g=np.argmax(fct2(i,K))
+    return g
+#print(np.argmax(fct2(i,K))) 
+
+
+f=[]
+for i in length: 
+    f.append(g(i))
